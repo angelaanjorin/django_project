@@ -1,1 +1,1 @@
-web: gunicorn my-django-project-hello.wsgi
+web: gunicorn python3 manage.py runserver
