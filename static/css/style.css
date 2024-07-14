@@ -1,0 +1,78 @@
+
+/* Default styling */
+
+body {
+    background-color: whitesmoke;
+}
+
+.light {
+    background-color: #dbd7d2;
+}
+
+#bg-pic {
+    background-color: silver;
+}
+
+.img-overlay {
+    background-image: linear-gradient(to left, rgba(250,250,250,0), rgba(255,250,250,0.8), rgba(255,250,250,1));
+}
+
+.scale {
+    width: 100%;
+    height: auto;
+}
+
+
+/* Messaging */
+
+.flash-msg {
+    position: fixed;
+    z-index: 1010;
+    top: 3rem;
+    right: 1rem;
+    left: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Page navigation styling */
+
+.post-link {
+    text-decoration: none;
+    color: #373938;
+}
+
+.post-link:hover,
+.page-link {
+    color: #5d9857;
+}
+
+/* Buttons styling */
+
+.btn-signup,
+.btn-edit {
+    background-color: #8d9292;
+    color: #fff;
+    border-color:#2d3636;
+}
+
+.btn-signup:hover,
+.btn-signup:active {
+    background-color: #363535;
+    color: #fefefe;
+    
+}
+
+/* Responsive styling */
+
+/* Media query for large or landscape phones (576px and up) */
+@media screen and (min-width: 576px) {
+    #bg-pic {
+        background-image: url(../images/nature1.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-bottom: 0;
+    }
+
+
+}
