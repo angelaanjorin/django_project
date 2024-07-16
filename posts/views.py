@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse
-from django.views import generic
+from django.views import generic, View
 from django.views.generic import ListView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -29,7 +29,7 @@ class PostList(generic.ListView):
     paginate_by = 6
 
 
-def post_detail(request, slug):
+class post_detail(View):
     """
     Display an individual :model:`blog.Post`.
 
@@ -46,13 +46,37 @@ def post_detail(request, slug):
 
     **Template:**
 
-    :template:`bewell_blog/post_detail.html`
+    :template:`post_detail.html`
     """
-    queryset = Post.objects.filter(status=1)
-    post = get_object_or_404(queryset, slug=slug)
-    comments = post.comments.all().order_by("-created_on")
-    comment_count = post.comments.filter(approved=True).count()
-    if request.method == "POST":
+    def get (self, request, slug, *args, **kwargs):
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+        comments = post.comments.filter(approved=True).order_by("-created_on")
+        comment_count = post.comments.filter(approved=True).count()
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        return render(
+            request,
+            "post_detail.html",
+            {
+                "post": post,
+                "comments": comments,
+                "liked": liked,
+                "comment_form": CommentForm(),
+            },
+        )
+
+    def post(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+        comments = post.comments.filter(approved=True).order_by("-created_on")
+        comment_count = post.comments.filter(approved=True).count()
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
@@ -63,18 +87,21 @@ def post_detail(request, slug):
                 request, messages.SUCCESS,
                 'Thank you! Your comment awaits aproval.'
             )
+        else:
+            comment_form = CommentForm()
 
-    comment_form = CommentForm()
-
-    return render(
-        request,
-        "posts/post_detail.html",
-        {"post": post,
-            "comments": comments,
-            "comment_count": comment_count,
-            "comment_form": comment_form,
-         },
-    )
+        return render(
+            request,
+            "post_detail.html",
+            {
+                "post": post,
+                "comments": comments,
+                "commented": True,
+                "comment_count": comment_count,
+                "comment_form": comment_form,
+                "liked": liked
+            },
+        )
 
 
 def comment_edit(request, slug, comment_id):
@@ -133,6 +160,22 @@ def comment_delete(request, slug, comment_id):
                              'You can only delete your own comments!')
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class PostLike(View):
+    """
+    Toggles like status on submission of like form/button on posts.
+    Also sends notification to author
+    Login required
+    """
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 # Category list view

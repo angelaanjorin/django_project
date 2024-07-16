@@ -35,16 +35,31 @@
                 <p class="card-text">
                     {{ post.content | safe }}
                 </p>
-            </div>
-        </div>
-    </div>
 
     <!-- Displaying count of comments -->
   <div class="row">
     <div class="col-12">
-      <strong class="text-secondary">
-        <i class="far fa-comments"></i> {{ comment_count }}
-      </strong>
+      {% with comments.count as total_comments %}
+      <strong class="text-secondary"><i class="far fa-comments"></i>
+          <!-- Our total_comments variable goes before the closing strong tag -->
+          {{ total_comments }}</strong>
+      {% endwith %}
+      <strong>
+        {% if user.is_authenticated %}
+        <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+            {% csrf_token %}
+            {% if liked %}
+            <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i class="fas fa-heart"></i></button>
+            {% else %}
+            <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i class="far fa-heart"></i></button>
+            {% endif %}
+        </form>
+        {% else %}
+        <span class="text-secondary"><i class="far fa-heart"></i></span>
+        {% endif %}
+    <!-- The number of likes goes before the closing strong tag -->
+    <span class="text-secondary">{{ post.number_of_likes }} </span>
+    </strong>
     </div>
     <div class="col-12">
       <hr>
@@ -97,7 +112,8 @@
               class="btn btn-signup btn-lg">Submit</button>
           </form>
           {% else %}
-          <p>Log in to leave a comment</p>
+          <!--<p>Log in to leave a comment</p>-->
+          <a class="dark-grey" href="/blog" aa-clickarea="commentarea" aa-clickname="Comment">Login to leave a comment</a>
           {% endif %}
         </div>
       </div>

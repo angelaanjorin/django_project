@@ -30,9 +30,9 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['8000-madeleine2086-pp4-8cp6mc5i17p.ws-eu110.gitpod.io',
+ALLOWED_HOSTS = ['8000-angelaanjor-djangoproje-qet6u6jy198.ws-eu115.gitpod.io',
                  '.herokuapp.com']
 
 
@@ -108,8 +108,16 @@ WSGI_APPLICATION = 'my_project.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+
+#DATABASES = {
+#    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+#}
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.gitpod.io",
