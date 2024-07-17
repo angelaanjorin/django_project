@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-angelaanjor-djangoproje-qet6u6jy198.ws-eu115.gitpod.io',
+ALLOWED_HOSTS = ['8000-angelaanjor-djangoproje-u4x1s2qyl7y.ws-eu115.gitpod.io',
                  '.herokuapp.com']
 
 
@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'cloudinary',
     'posts',
     'about',
+    'jobs',
+    'phonenumber_field',
 ]
 
 SITE_ID = 1

@@ -22,7 +22,7 @@ class PostList(generic.ListView):
 
     **Template:**
 
-    :template:`bewell_blog/index.html`
+    :template:`posts/index.html`
     """
     queryset = Post.objects.filter(status=1)
     template_name = "posts/index.html"
@@ -85,7 +85,7 @@ class post_detail(View):
             comment.save()
             messages.add_message(
                 request, messages.SUCCESS,
-                'Thank you! Your comment awaits aproval.'
+                'Thank you! Your comment awaits approval.'
             )
         else:
             comment_form = CommentForm()

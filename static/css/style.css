@@ -68,7 +68,7 @@ body {
 /* Media query for large or landscape phones (576px and up) */
 @media screen and (min-width: 576px) {
     #bg-pic {
-        background-image: url(../images/nature1.jpg);
+        background-image: url(../images/GMS-employees-sized.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         margin-bottom: 0;

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- UPDATE JOB SECTION -->
+    <div class="edit-jobs container box-shadow">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="title">Edit Job</h1>
+                <p>Edit Job as: {{ user.username | slice:":10" }}</p>
+                {% if user.profile.image %}
+                <img class="author-img mb-4" src="{{ user.profile.image.url }}" alt="User Image">
+                {% else %}
+                <img class="author-img mb-4" src="{% static 'images/small-img/user_profile_placeholder.jpg' %}" alt="User Image">
+                {% endif %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-secondary right mb-4" type="submit" value="Save">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END UPDATE JOB SECTION  -->
+
+    {% endblock content %}

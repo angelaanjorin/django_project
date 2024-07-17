@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<!-- PROFILE SECTION -->
+<section id="profile">
+    <h2 class="title mt-5">Profile Info</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {% if user.profile.image %}
+                <img class="author-img" src="{{ user.profile.image.url }}" alt="User Image">
+                {% else %}
+                <img class="author-img" src="{% static 'images/small-img/user_profile_placeholder.jpg' %}"
+                    alt="User Image">
+                {% endif %}
+            </div>
+            <div class="user-info-box col-md-6">
+                <h3>Username: {{ user.username | slice:":15" }}</h3>
+                <h3>Email: {{ user.email }}</h3>
+                <h3>Time Logged: {{ user.last_login | timesince }}</h3>
+                {% if user.is_superuser %}
+                <h3>Status: Superuser</h3>
+                {% else %}
+                <h3>Status: User</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <form class="update-profile form-control mt-5 box-shadow" id="signup_form" method="post"
+        action="{% url 'profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form | crispy }}
+        {{ profile_form | crispy }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="btn-sm btn-secondary mt-3 mb-3" type="submit">Update</button>
+    </form>
+    {% if user.is_superuser %}
+    <a class="btn btn-secondary mt-5" href="/admin" target="_blank" aria-label="Go to the Admin Panel">Admin Panel</a>
+    {% endif %}
+</section>
+<!-- END OF PROFILE SECTION -->
+
+{% endblock content %}
