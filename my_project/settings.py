@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'posts',
     'about',
-    'jobs',
     'phonenumber_field',
 ]
 
