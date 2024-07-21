@@ -16,7 +16,7 @@ class Speciality(models.Model):
     and :model:`job.Speciality`
     """
     class Meta:
-        verbose_name_plural = 'Speciality'
+        verbose_name_plural = 'Specialities'
     name = models.CharField(max_length=30, unique=True)
 
     def __str__(self):
