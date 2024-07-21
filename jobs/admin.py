@@ -11,8 +11,8 @@ class JobsAdmin(SummernoteModelAdmin):
     """
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('status', 'created_on')
-    summernote_fields = 'review'
-    list_display = ('title', 'slug', 'status', 'created_on','speciality', 'author', 'location', 'dates', 'link', 'review',)
+    summernote_fields = 'job_description'
+    list_display = ('title', 'status', 'created_on', 'author','start_date', 'end_date')
     search_fields = ['title', 'author']
 
     admin.site.register(Speciality)

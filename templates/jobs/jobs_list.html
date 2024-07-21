@@ -2,22 +2,52 @@
 {% load static %}
 
 {% block content %}
-The joblists should go here.
-<!--Jobslist Page content-->
-<div class="col-12 left">
+
+<!-- jobs_list.html content starts here -->
+<div class="job-board">
+    <div class="container">
     <div class="row">
-        {% for job in job_list %}
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <a href="{% url 'job_detail' job.slug %}" class="post-link">
-                        <h2 class="card-title">{{ job.title }}</h2>
-                        <p class="card-text">{{ job.speciality }}</p>
-                        <p class="card-text">{{ job.location }}</p>
-                        <p class="card-text">{{ job.dates }}</p>
-                    </a>
+        {% for job in jobs_list %}
+        <div class="col-lg-3">
+            <div class="d-block d-lg-none">
+                <h4> Jobs List</h4>
+                <div class="job-list">
+                    <div class="job position-relative" id="{{job_id}}">
+                        <a href="{% url 'job_detail' job.slug %}" class="post-link">
+                        <h2 class="card-title">{{ job.title }}</h2> 
+                        <div class="row hide-when-has-form">
+                            <div class="col-md-4 col-lg-3">
+                                <label class="mb-0">Date Posted:</label><br>
+                                <p class="card-text text-muted h6">{{ job.created_on}}</p>
+                                <label class="mb-0">Location</label>
+                                <p class="water vitesse-medium">{{job.location}}</p>
+                            </div>
+                            <div class="col-lg-6 col-md-8">
+                                <p class="sm-px-3"><a class="unstyled" href="#">Interested? There’s more to tell. Feel free to request information, or just pick up the phone and give us a call....</a>
+                                    <br><a href="#" class="inline-link fire" aa-clickarea="Job Board Results" aa-clickname="Job Details" aa-clicktext="View Full Details">View full details</a></p>
+                            </div>
+                            <div class="mt-md-0 mt-8 col-lg-3 col-md-6 offset-md-3 offset-lg-0">
+                                <div class="row">
+                                    <div class="order-md-2 order-lg-1 col-md-6 col-lg-12">
+                                        <button class="btn outline sunshine-border sunshine quick-apply-button" onclick="enableQuickApply('job-id');" data-test-aa="quick-apply-initiated" data-test="quick-apply-button" data-job="#"><span class="button-label">quick apply</span><div class="btn-arrow">
+                        <span class="left-line sunshine-background"></span>
+                        <span class="right-line sunshine-background"></span>
+                        <span class="center-line sunshine-background"></span>
+                        <span class="d-line1 sunshine-background"></span>
+                        <span class="d-line2 sunshine-background"></span>
+                    </div></button>
+                                    </div>
+                                    <div class="order-md-1 order-lg-2 col-md-6 col-lg-12">
+                                        <button class="save-job-btn btn unfavorited transparent sunshine" data-id="JOB-2970138" data-title="Facility in CT Needs a Obstetrics/Gynecologist" data-specialty="obstetrics-and-gynecology" data-test-aa="job-favorited" aa-clickarea="Job Board Results" aa-clicktext="Save Job">save job</button>
+                                        <button class="save-job-btn btn favorited transparent water" style="display:none" data-id="JOB-2970138" data-title="Facility in CT Needs a Obstetrics/Gynecologist">saved job</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <hr>
-                    <p class="card-text text-muted h6">{{ job.created_on }}</p>
+                    
                 </div>
             </div>
         </div>
@@ -26,9 +56,10 @@ The joblists should go here.
     <div class="row">
         {% endif %}
         {% endfor %}
+
+    </div>
     </div>
 </div>
-
 <div>
     {% if is_paginated %}
     <nav aria-label="Page navigation">
@@ -44,4 +75,5 @@ The joblists should go here.
     {% endif %}
 </div>
 
+<!-- jobs_list.html content ends here -->
 {% endblock %}

@@ -35,11 +35,12 @@ class Job(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     speciality = models.ForeignKey(Speciality, on_delete=models.PROTECT, default=4)
     created_on = models.DateTimeField(auto_now_add=True)
-    location = models.TextField()
-    dates = models.DurationField()
+    location = models.CharField(max_length=300, unique=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
     link = models.URLField(blank=True)
     status = models.IntegerField(choices=STATUS, default=1)
-    review = models.TextField(max_length=200)
+    job_description = models.TextField()
 
     class Meta:
         ordering = ["-created_on"]
