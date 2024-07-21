@@ -122,7 +122,7 @@ DATABASES = {
 #}
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.gitpod.io",
+    "https://*.codeinstitute-ide.nets",
     "https://*.herokuapp.com"
 ]
 
