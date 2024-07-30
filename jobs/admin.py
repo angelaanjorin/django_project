@@ -15,4 +15,4 @@ class JobsAdmin(SummernoteModelAdmin):
     list_display = ('title', 'status', 'created_on', 'author','start_date', 'end_date')
     search_fields = ['title', 'author']
 
-    admin.site.register(Speciality)
+    admin.site.register(models.Speciality)
