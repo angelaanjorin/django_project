@@ -49,20 +49,17 @@
                        <a class="nav-link active" href="/contact" aria-label="Go to the contact page">Contact</a>
                    </li>
                    <li class="nav-item dropdown">
-                       <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                           Categories
-                       </a>
-                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <li><a class="dropdown-item" href="/categories" aria-label="Go to the categories page">Categories</a></li>
-                           <li>
-                               <hr class="dropdown-divider">
-                           </li>
-                           {% for category in categories_list %}
-                           <li><a class="dropdown-item" href="{% url 'categories_posts' category.title %}" aria-label="Go to the each category page">{{ category.title }}</a></li>
-                           {% endfor %}
-                       </ul>
-                   </li>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Categories
+                    </a>
+                    <div class="dropdown-menu light" aria-labelledby="navbarDropdownMenuLink">
+                      {% for category in category_list %}
+                      <a class="dropdown-item" href="/category/{{ category.name}}">
+                        {{ category.name|title }}
+                      </a>
+                      {% endfor %}
+                    </div>
+                </li>    
                </ul>
                {% if user.is_authenticated %}
                <ul class="d-flex login-box ml-auto">
