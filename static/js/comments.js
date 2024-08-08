@@ -1,3 +1,7 @@
+
+// Get fully year on the footer
+$("#year").text(new Date().getFullYear());
+
 const editButtons = document.getElementsByClassName("btn-edit");
 const commentText = document.getElementById("id_body");
 const commentForm = document.getElementById("commentForm");

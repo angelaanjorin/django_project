@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # URL of the page to scrape
-url = "https://gmedical.com/blog/love-and-locums/"
+url = "https://gmedical.com/blog/international-locum-tenens-after-residency/"
 
 # Send a GET request to the URL
 response = requests.get(url)

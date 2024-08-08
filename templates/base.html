@@ -29,7 +29,7 @@
     {% load static %}
    
    <!-- NAVBAR -->
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+   <nav class="navbar navbar-expand-lg" style=background-color:#dbd7d2;>
        <div class="container-fluid">
            <a class="navbar-brand" href="{% url 'home' %}">Global Doctors | Be a doc and travel the world</a>  
            <button class="navbar-toggler box-shadow" style="text-align: center;" type="button" data-bs-toggle="collapse"
@@ -67,11 +67,6 @@
                    <li class="nav-item display-inline">
                        <a href="/profile"><p class="post-link">| <i class="fa fa-user" aria-hidden="true"></i> {{ user.username | slice:":10" }}</p></a>
                    </li>
-                   {% if user.profile.image %}
-                   <li><img class="author-img" src="{{ user.profile.image.url }}" alt="User Image"></li>
-                   {% else %}
-                   <li><img class="author-img" src="{% static 'images/user_profile_placeholder.jpg' %}" alt="User Image"></li>
-                   {% endif %}
                    <li>
                        <a class="post-link test-center" href="{% url 'account_logout' %}" aria-label="Go to the logout page"> Logout <i class="fa fa-sign-out" aria-hidden="true"></i>|</a>
                    </li>
@@ -87,7 +82,7 @@
                </ul>
                {% endif %}
                
-               <p id="search-box-button" class="btn"><i class="fas fa-search"></i></p>
+               <p id="search-box-button" class="btn nav-item"><i class="fas fa-search"></i></p>
            </div>
        </div>
    </nav>
